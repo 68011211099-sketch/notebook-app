@@ -1,0 +1,18 @@
+<!doctype html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Notebook</title><style>
+body{font-family:system-ui,sans-serif;max-width:760px;margin:0 auto;padding:16px;line-height:1.6;color:#1d2a2a;background:#f6f8f7}
+nav{display:flex;gap:14px;align-items:center;border-bottom:2px solid #1f6f5c;padding-bottom:8px;margin-bottom:16px;flex-wrap:wrap}
+nav a{color:#1f6f5c;font-weight:600;text-decoration:none} nav form{margin-left:auto}
+input,textarea{width:100%;padding:8px;margin:4px 0 10px;border:1px solid #9bb;border-radius:4px;font:inherit;box-sizing:border-box}
+button{background:#1f6f5c;color:#fff;border:0;padding:8px 14px;border-radius:4px;cursor:pointer;font:inherit}
+button.d{background:#b3382c} .flash{background:#fff3c4;padding:8px 12px;border-radius:4px;margin-bottom:10px}
+.card{background:#fff;border:1px solid #d5dedb;border-radius:6px;padding:10px 14px;margin:10px 0}
+table{width:100%;border-collapse:collapse;font-size:.9rem} td,th{border-bottom:1px solid #d5dedb;padding:4px;text-align:left}
+form.i{display:inline} small{color:#667}</style></head><body>
+<nav><a href="/">หน้าแรก</a>
+{% if me %}<a href="/notes">บันทึกของฉัน</a><a href="/contact">ติดต่อผู้ดูแล</a>
+{% if me.role=='admin' %}<a href="/admin">แอดมิน</a>{% endif %}
+<form method="post" action="/logout"><input type="hidden" name="csrf_token" value="{{csrf_token}}"><small>{{me.username}} ({{me.role}})</small> <button>ออกจากระบบ</button></form>
+{% else %}<a href="/login">เข้าสู่ระบบ</a><a href="/register">สมัครสมาชิก</a>{% endif %}</nav>
+{% for m in get_flashed_messages() %}<div class="flash">{{m}}</div>{% endfor %}
+{% block c %}{% endblock %}</body></html>

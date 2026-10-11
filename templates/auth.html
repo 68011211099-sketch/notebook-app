@@ -1,0 +1,5 @@
+{% extends "base.html" %}{% block c %}<h2>{{title}}</h2>
+<form method="post"><input type="hidden" name="csrf_token" value="{{csrf_token}}">
+ชื่อผู้ใช้<input name="username" required maxlength="30" autocomplete="username">
+รหัสผ่าน<input name="password" type="password" required minlength="{{ 8 if title=='สมัครสมาชิก' else 1 }}" maxlength="128">
+<button>{{title}}</button></form>{% endblock %}

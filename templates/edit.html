@@ -1,0 +1,3 @@
+{% extends "base.html" %}{% block c %}<h2>แก้ไขบันทึก</h2>
+<form method="post"><input type="hidden" name="csrf_token" value="{{csrf_token}}">
+หัวข้อ<input name="title" required maxlength="100" value="{{n.title}}">เนื้อหา<textarea name="body" rows="4" maxlength="2000">{{n.body}}</textarea><button>บันทึกการแก้ไข</button></form>{% endblock %}

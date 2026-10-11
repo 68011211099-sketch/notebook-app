@@ -1,0 +1,5 @@
+{% extends "base.html" %}{% block c %}<h2>ติดต่อผู้ดูแล</h2>
+<form method="post" class="card"><input type="hidden" name="csrf_token" value="{{csrf_token}}">
+หัวข้อ<input name="subject" required maxlength="100">ข้อความ<textarea name="message" rows="3" required maxlength="1000"></textarea><button>ส่งข้อความ</button></form>
+<h3>ข้อความที่ส่งแล้ว</h3>{% for m in msgs %}<div class="card"><b>{{m.subject}}</b> <small>{{m.created_at}}</small><p>{{m.message}}</p></div>
+{% else %}<p>ยังไม่เคยส่งข้อความ</p>{% endfor %}{% endblock %}

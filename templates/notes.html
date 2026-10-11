@@ -1,0 +1,7 @@
+{% extends "base.html" %}{% block c %}<h2>บันทึกของฉัน</h2>
+<form method="post" class="card"><input type="hidden" name="csrf_token" value="{{csrf_token}}">
+หัวข้อ<input name="title" required maxlength="100">เนื้อหา<textarea name="body" rows="3" maxlength="2000"></textarea><button>เพิ่มบันทึก</button></form>
+{% for n in notes %}<div class="card"><b>{{n.title}}</b> <small>{{n.created_at}}</small><p>{{n.body}}</p>
+<a href="/notes/{{n.id}}/edit">แก้ไข</a>
+<form class="i" method="post" action="/notes/{{n.id}}/delete" onsubmit="return confirm('ลบบันทึกนี้?')"><input type="hidden" name="csrf_token" value="{{csrf_token}}"><button class="d">ลบ</button></form></div>
+{% else %}<p>ยังไม่มีบันทึก เพิ่มอันแรกด้านบนได้เลย</p>{% endfor %}{% endblock %}

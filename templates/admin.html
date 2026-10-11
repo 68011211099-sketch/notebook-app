@@ -1,0 +1,7 @@
+{% extends "base.html" %}{% block c %}<h2>จัดการผู้ใช้</h2>
+<table><tr><th>ผู้ใช้</th><th>บทบาท</th><th>จัดการ</th></tr>{% for u in users %}<tr><td>{{u.username}}</td><td>{{u.role}}</td><td>
+{% if u.id!=me.id %}<form class="i" method="post" action="/admin/users/{{u.id}}/role"><input type="hidden" name="csrf_token" value="{{csrf_token}}"><input type="hidden" name="role" value="{{'user' if u.role=='admin' else 'admin'}}"><button>เปลี่ยนเป็น {{'user' if u.role=='admin' else 'admin'}}</button></form>
+<form class="i" method="post" action="/admin/users/{{u.id}}/delete" onsubmit="return confirm('ลบผู้ใช้และข้อมูลทั้งหมด?')"><input type="hidden" name="csrf_token" value="{{csrf_token}}"><button class="d">ลบ</button></form>{% endif %}</td></tr>{% endfor %}</table>
+<h2>บันทึกทั้งหมด</h2>{% for n in notes %}<div class="card"><b>{{n.title}}</b> <small>โดย {{n.username}}</small><p>{{n.body}}</p>
+<form class="i" method="post" action="/admin/notes/{{n.id}}/delete"><input type="hidden" name="csrf_token" value="{{csrf_token}}"><button class="d">ลบ</button></form></div>{% endfor %}
+<h2>ข้อความจากผู้ใช้</h2>{% for m in msgs %}<div class="card"><b>{{m.subject}}</b> <small>จาก {{m.username}}</small><p>{{m.message}}</p></div>{% else %}<p>ยังไม่มีข้อความ</p>{% endfor %}{% endblock %}
